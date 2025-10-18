@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Jumpserver - Multi-Cloud Operations Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-cloud"></i>
+                <span>Cloud Jumpserver</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#terminal" class="nav-link"><i class="fas fa-terminal"></i> Terminal</a></li>
+                <li><a href="#cloud-info" class="nav-link"><i class="fas fa-info-circle"></i> Cloud Info</a></li>
+                <li><a href="#pricing" class="nav-link"><i class="fas fa-dollar-sign"></i> Pricing</a></li>
+                <li><a href="#tools" class="nav-link"><i class="fas fa-tools"></i> Tools</a></li>
+                <li><a href="#comparison" class="nav-link"><i class="fas fa-balance-scale"></i> Compare</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Multi-Cloud Operations Platform</h1>
+            <p>Your centralized hub for AWS, GCP, Azure, Alibaba Cloud, Oracle Cloud, and more</p>
+        </section>
+
+        <!-- Web Terminal Section -->
+        <section id="terminal" class="section">
+            <h2><i class="fas fa-terminal"></i> Web Terminal</h2>
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <span class="terminal-title">Cloud Operations Terminal</span>
+                    <div class="terminal-controls">
+                        <button id="clearTerminal" title="Clear"><i class="fas fa-trash"></i></button>
+                        <button id="copyTerminal" title="Copy"><i class="fas fa-copy"></i></button>
+                    </div>
+                </div>
+                <div id="terminalOutput" class="terminal-output"></div>
+                <div class="terminal-input-container">
+                    <span class="terminal-prompt">$</span>
+                    <input type="text" id="terminalInput" class="terminal-input" placeholder="Type 'help' for available commands..." autocomplete="off">
+                </div>
+            </div>
+        </section>
+
+        <!-- Cloud Information Section -->
+        <section id="cloud-info" class="section">
+            <h2><i class="fas fa-cloud"></i> Cloud Providers Information</h2>
+            <div class="cloud-grid">
+                <div class="cloud-card aws">
+                    <div class="cloud-icon"><i class="fab fa-aws"></i></div>
+                    <h3>Amazon Web Services (AWS)</h3>
+                    <p><strong>Regions:</strong> 32 regions, 102 availability zones</p>
+                    <p><strong>Services:</strong> 200+ services</p>
+                    <button class="btn" onclick="showCloudDetails('aws')">View Details</button>
+                </div>
+                <div class="cloud-card azure">
+                    <div class="cloud-icon"><i class="fab fa-microsoft"></i></div>
+                    <h3>Microsoft Azure</h3>
+                    <p><strong>Regions:</strong> 60+ regions worldwide</p>
+                    <p><strong>Services:</strong> 200+ services</p>
+                    <button class="btn" onclick="showCloudDetails('azure')">View Details</button>
+                </div>
+                <div class="cloud-card gcp">
+                    <div class="cloud-icon"><i class="fab fa-google"></i></div>
+                    <h3>Google Cloud Platform (GCP)</h3>
+                    <p><strong>Regions:</strong> 40+ regions, 121 zones</p>
+                    <p><strong>Services:</strong> 100+ services</p>
+                    <button class="btn" onclick="showCloudDetails('gcp')">View Details</button>
+                </div>
+                <div class="cloud-card alibaba">
+                    <div class="cloud-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Alibaba Cloud</h3>
+                    <p><strong>Regions:</strong> 27 regions, 86 availability zones</p>
+                    <p><strong>Services:</strong> 200+ services</p>
+                    <button class="btn" onclick="showCloudDetails('alibaba')">View Details</button>
+                </div>
+                <div class="cloud-card oracle">
+                    <div class="cloud-icon"><i class="fas fa-database"></i></div>
+                    <h3>Oracle Cloud</h3>
+                    <p><strong>Regions:</strong> 44 regions</p>
+                    <p><strong>Services:</strong> 100+ services</p>
+                    <button class="btn" onclick="showCloudDetails('oracle')">View Details</button>
+                </div>
+                <div class="cloud-card ibm">
+                    <div class="cloud-icon"><i class="fas fa-server"></i></div>
+                    <h3>IBM Cloud</h3>
+                    <p><strong>Regions:</strong> 60+ data centers</p>
+                    <p><strong>Services:</strong> 170+ services</p>
+                    <button class="btn" onclick="showCloudDetails('ibm')">View Details</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Comparison Section -->
+        <section id="pricing" class="section">
+            <h2><i class="fas fa-dollar-sign"></i> Pricing Comparison</h2>
+            <div class="pricing-tools">
+                <select id="serviceType" class="select-input">
+                    <option value="compute">Compute Instances</option>
+                    <option value="storage">Storage</option>
+                    <option value="database">Database</option>
+                    <option value="network">Network/Data Transfer</option>
+                </select>
+                <select id="region" class="select-input">
+                    <option value="us-east">US East</option>
+                    <option value="us-west">US West</option>
+                    <option value="eu-west">Europe West</option>
+                    <option value="asia-pacific">Asia Pacific</option>
+                </select>
+                <button class="btn-primary" onclick="comparePricing()">Compare Prices</button>
+            </div>
+            <div id="pricingResults" class="pricing-results"></div>
+        </section>
+
+        <!-- Network Tools Section -->
+        <section id="tools" class="section">
+            <h2><i class="fas fa-tools"></i> Network & Cloud Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3><i class="fas fa-search"></i> WHOIS Lookup</h3>
+                    <input type="text" id="whoisInput" placeholder="Enter domain or IP" class="tool-input">
+                    <button class="btn" onclick="performWhois()">Lookup</button>
+                    <div id="whoisResult" class="tool-result"></div>
+                </div>
+                <div class="tool-card">
+                    <h3><i class="fas fa-network-wired"></i> IP Block Info</h3>
+                    <input type="text" id="ipBlockInput" placeholder="Enter IP or CIDR" class="tool-input">
+                    <button class="btn" onclick="getIPBlockInfo()">Get Info</button>
+                    <div id="ipBlockResult" class="tool-result"></div>
+                </div>
+                <div class="tool-card">
+                    <h3><i class="fas fa-heartbeat"></i> Ping/Latency Test</h3>
+                    <input type="text" id="pingInput" placeholder="Enter hostname or IP" class="tool-input">
+                    <button class="btn" onclick="performPing()">Test</button>
+                    <div id="pingResult" class="tool-result"></div>
+                </div>
+                <div class="tool-card">
+                    <h3><i class="fas fa-route"></i> DNS Lookup</h3>
+                    <input type="text" id="dnsInput" placeholder="Enter domain" class="tool-input">
+                    <button class="btn" onclick="performDNS()">Lookup</button>
+                    <div id="dnsResult" class="tool-result"></div>
+                </div>
+                <div class="tool-card">
+                    <h3><i class="fas fa-calculator"></i> CIDR Calculator</h3>
+                    <input type="text" id="cidrInput" placeholder="Enter CIDR (e.g., 10.0.0.0/24)" class="tool-input">
+                    <button class="btn" onclick="calculateCIDR()">Calculate</button>
+                    <div id="cidrResult" class="tool-result"></div>
+                </div>
+                <div class="tool-card">
+                    <h3><i class="fas fa-random"></i> IP Subnet Calculator</h3>
+                    <input type="text" id="subnetInput" placeholder="Enter IP/Mask" class="tool-input">
+                    <button class="btn" onclick="calculateSubnet()">Calculate</button>
+                    <div id="subnetResult" class="tool-result"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cloud Comparison Section -->
+        <section id="comparison" class="section">
+            <h2><i class="fas fa-balance-scale"></i> Cloud Provider Comparison</h2>
+            <div class="comparison-selector">
+                <div class="compare-select">
+                    <label>Provider 1:</label>
+                    <select id="provider1" class="select-input">
+                        <option value="aws">AWS</option>
+                        <option value="azure">Azure</option>
+                        <option value="gcp">GCP</option>
+                        <option value="alibaba">Alibaba Cloud</option>
+                        <option value="oracle">Oracle Cloud</option>
+                    </select>
+                </div>
+                <div class="compare-select">
+                    <label>Provider 2:</label>
+                    <select id="provider2" class="select-input">
+                        <option value="azure">Azure</option>
+                        <option value="aws">AWS</option>
+                        <option value="gcp">GCP</option>
+                        <option value="alibaba">Alibaba Cloud</option>
+                        <option value="oracle">Oracle Cloud</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="compareProviders()">Compare</button>
+            </div>
+            <div id="comparisonResults" class="comparison-results"></div>
+        </section>
+
+        <!-- Region Information -->
+        <section class="section">
+            <h2><i class="fas fa-globe"></i> Region Information</h2>
+            <div class="region-selector">
+                <select id="cloudProvider" class="select-input" onchange="loadRegions()">
+                    <option value="aws">AWS Regions</option>
+                    <option value="azure">Azure Regions</option>
+                    <option value="gcp">GCP Regions</option>
+                    <option value="alibaba">Alibaba Regions</option>
+                    <option value="oracle">Oracle Regions</option>
+                </select>
+            </div>
+            <div id="regionInfo" class="region-grid"></div>
+        </section>
+    </div>
+
+    <!-- Modal for Cloud Details -->
+    <div id="cloudModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cloud Jumpserver - Multi-Cloud Operations Platform</p>
+        <p>Built with ❤️ for Cloud Engineers</p>
+    </footer>
+
+    <script src="terminal.js"></script>
+    <script src="cloud-data.js"></script>
+    <script src="tools.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
